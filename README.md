@@ -12,7 +12,9 @@ It is organised as follows:
 3. Scripts
 
 The data contains the following variables:
+
 Operation Name: Name of site for which energy data pertains
+
 Operation Type: Ontario Regulation 397/11 category for site
 Address:	Site street address
 City: Municipality where site is located
@@ -27,4 +29,3 @@ Natural Gas Unit: Unit of measurement
 GHG Emissions (Kg): Total greenhouse gas emissions for site
 Energy Intensity (ekWh/sqft): Total energy use per square foot of building space for site
 Energy Intensity (ekWh/Mega Litre): Total energy use per mega litre of flow for water operations
-
