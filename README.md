@@ -26,19 +26,11 @@ The data contains the following variables:
 - Floor Area: Gross floor area of building on site
 - Unit:	Unit of measurement for floor area
 - Average Hrs/Week: Weekly operating hours of operations
-
-Annual Flow (Mega Litres):	Mega litres of water processed by water operations
-
-Electricity Quantity:	Total annual consumption for site
-
-Electricity Unit:	Unit of measurement
-
-Natural Gas Quantity:	Total annual consumption for site
-
-Natural Gas Unit: Unit of measurement
-
-GHG Emissions (Kg): Total greenhouse gas emissions for site
-
-Energy Intensity (ekWh/sqft): Total energy use per square foot of building space for site
-
-Energy Intensity (ekWh/Mega Litre): Total energy use per mega litre of flow for water operations
+- Annual Flow (Mega Litres): Mega litres of water processed by water operations
+- Electricity Quantity:	Total annual consumption for site
+- Electricity Unit: Unit of measurement
+- Natural Gas Quantity:	Total annual consumption for site
+- Natural Gas Unit: Unit of measurement
+- GHG Emissions (Kg): Total greenhouse gas emissions for site
+- Energy Intensity (ekWh/sqft): Total energy use per square foot of building space for site
+- Energy Intensity (ekWh/Mega Litre): Total energy use per mega litre of flow for water operations
