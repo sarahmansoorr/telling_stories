@@ -19,19 +19,13 @@ It is organised as follows:
 
 The data contains the following variables:
 
-Operation Name: Name of site for which energy data pertains
-
-Operation Type: Ontario Regulation 397/11 category for site
-
-Address: Site street address
-
-City: Municipality where site is located
-
-Floor Area: Gross floor area of building on site
-
-Unit:	Unit of measurement for floor area
-
-Average Hrs/Week:	Weekly operating hours of operations
+- Operation Name: Name of site for which energy data pertains
+- Operation Type: Ontario Regulation 397/11 category for site
+- Address: Site street address
+- City: Municipality where site is located
+- Floor Area: Gross floor area of building on site
+- Unit:	Unit of measurement for floor area
+- Average Hrs/Week: Weekly operating hours of operations
 
 Annual Flow (Mega Litres):	Mega litres of water processed by water operations
 
