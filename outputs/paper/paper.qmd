@@ -1,0 +1,118 @@
+---
+title: "Vizualizing Annual Energy Consumption in Toronto"
+subtitle: "A Look Into How Energy Consumption has Changed from 2015 to 2018 "
+author: "Sarah Mansoor"
+thanks: "Code and data are available at: https://github.com/sarahmansoorr/telling_stories"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data and find that the total reported emissions in Toronto are increasing yearly, but on average public agencies are reporting decreases in their greenhouse gas emissions."
+bibliography: references.bib
+output:
+  bookdown::pdf_document2: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(tidyverse)
+library(opendatatoronto)
+library(patchwork)
+library(knitr)
+library(reshape2)
+library(janitor)
+library(kableExtra)
+library(sf)
+library(RColorBrewer)
+library(forcats)
+
+
+raw_data_2015 <- read_csv(here::here("inputs/data/raw_data_2015.csv"))
+raw_data_2016 <- read_csv(here::here("inputs/data/raw_data_2016.csv"))
+raw_data_2017 <- read_csv(here::here("inputs/data/raw_data_2017.csv"))
+raw_data_2018 <- read_csv(here::here("inputs/data/raw_data_2018.csv"))
+cleaned_data_2015 <- read_csv(here::here("inputs/data/cleaned_data_2015.csv"))
+cleaned_data_2016 <- read_csv(here::here("inputs/data/cleaned_data_2016.csv"))
+cleaned_data_2017 <- read_csv(here::here("inputs/data/cleaned_data_2017.csv"))
+cleaned_data_2018 <- read_csv(here::here("inputs/data/cleaned_data_2018.csv"))
+
+load('outputs/energy_consumption.RData')
+
+```
+
+# Introduction
+
+Over the years many have seen the consequences of climate change on the weather, their health, storms, and rising sea levels.
+
+The Green Energy Act's Regulation 397/11 requires the completion of an Energy Conservation and Demand Management (ECDM) Plan every 5 years. The City of Toronto completed the first edition of the ECDM plan, which was approved by the Council, in 2014. Facilities have been selected for energy retrofit work based on the energy savings they make and greenhouse gas reduction potential. The City aims to build on its previous energy efficiency achievements using the ECDM plan as a agenda for the identification, implementation and verification of future energy saving projects.
+
+I will explore GHG emissions in Toronto between the years
+2015 and 2018, and observe that the total amount of GHG emissions increase
+every year.
+
+\pagebreak
+
+# Data
+
+This assignment uses a data set from Open Data Toronto called Annual Energy Consumption. This data set contains columns for the energy consumption of individual buildings in Toronto that are required by Ontario Regulation 397/11 and the Green Energy Act to report their GHG emissions.
+
+This data set contains yearly xlsx spreadsheets from
+2015 to 2018 that have columns with the operation name; operation type; address; total floor area; amount of energy purchased in the form of electricity and natural gas; and GHG emissions.
+
+|     |
+|-----|
+|     |
+
+## Variables of interest
+
+The main variables that I am interested in for this paper are
+
+# Visualizing the Data and The Implications
+
+```{r echo=FALSE, fig.cap="Comparing Energy Consumption each year from 2015 to 2018", fig.width=8.4, fig.height=3.6}
+GHG <- energy.consumption |>
+  ggplot(mapping = aes(x = Year, y = GHG.Emissions, group=Year)) +
+  geom_boxplot() +
+  geom_jitter(alpha=0.05, width=0.2, height=0) +
+  theme_classic() +
+  labs(
+    x = 'Year',
+    y = 'GHG emissions (kg)'
+  ) +
+  scale_y_continuous(trans='log', labels=function(x) sprintf("%.1e", x)) +
+  theme(axis.text.y = element_text(angle = 60, vjust = 0.5, hjust=0.5))
+
+
+electricity <- energy_consumption |>
+  ggplot(mapping = aes(x = Year, y = Electricity, group=Year)) +
+  geom_boxplot() +
+  geom_jitter(alpha=0.05, width=0.2, height=0) +
+  theme_classic() +
+  labs(
+    x = 'Year',
+    y = 'Electricity Consumption (Wh)'
+  ) +
+  scale_y_continuous(trans='log', labels=function(x) sprintf("%.1e", x)) +
+  theme(axis.text.y = element_text(angle = 60, vjust = 0.5, hjust=0.5))
+
+
+floor_area <- energy_consumption |>
+  ggplot(mapping = aes(x = Year, y = Total.Floor.Area, group=Year)) +
+  geom_boxplot() +
+  geom_jitter(alpha=0.05, width=0.2, height=0) +
+  theme_classic() +
+  labs(
+    x = 'Year',
+    y = 'Total Floor Area'
+  ) +
+  scale_y_continuous(trans='log', labels=function(x) sprintf("%.1e", x)) +
+  theme(axis.text.y = element_text(angle = 60, vjust = 0.5, hjust=0.5))
+
+(ele + flr) / ghg
+
+```
+
+## Implications
+
+## **Limitations**
+
+# Next Steps
