@@ -1,4 +1,4 @@
-# telling_stories
+# Annual Energy Consumption in Toronto 2015-2018
 This repo contains the 'Telling Stories with Data' A.1 Paper One files. 
 
 It is organised as follows:
