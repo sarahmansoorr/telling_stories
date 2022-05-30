@@ -53,8 +53,7 @@ I will explore GHG emissions in Toronto between the years 2015 and 2018, and obs
 
 This assignment uses a data set from Open Data Toronto called Annual Energy Consumption. This data set contains columns for the energy consumption of individual buildings in Toronto that are required by Ontario Regulation 397/11 and the Green Energy Act to report their GHG emissions.
 
-This data set contains yearly xlsx spreadsheets from
-2015 to 2018 that have columns with the operation name; operation type; address; total floor area; amount of energy purchased in the form of electricity and natural gas; and GHG emissions.
+This data set contains yearly xlsx spreadsheets from 2015 to 2018 that have columns with the operation name; operation type; address; total floor area; amount of energy purchased in the form of electricity and natural gas; and GHG emissions.
 
 |     |
 |-----|
