@@ -15,6 +15,13 @@ library(tidyverse)
 library(opendatatoronto)
 library(dplyr)
 
+# Load Data
+
+data_2015 <- read.csv("telling_stories/inputs/data/energy_consumption_2015.csv")
+data_2016 <- read.csv("telling_stories/inputs/data/energy_consumption_2016.csv")
+data_2017 <- read.csv("telling_stories/inputs/data/energy_consumption_2017.csv")
+data_2018 <- read.csv("telling_stories/inputs/data/energy_consumption_2018.csv")
+
 # Cleaning data
 my_column_names <- c("Operation Name", "Operation Type", "Address",
                      "City", "Postal Code", "Total Floor Area",
@@ -33,6 +40,7 @@ my_column_names <- c("Operation Name", "Operation Type", "Address",
 # Cleaning 2015 data
 colnames(data_2015) <- my_column_names
 
+
 # Cleaning 2016 data
 colnames(data_2016) <- my_column_names
 
@@ -41,3 +49,5 @@ colnames(data_2017) <- my_column_names
 
 # Cleaning 2018 data
 colnames(data_2018) <- my_column_names
+
+
