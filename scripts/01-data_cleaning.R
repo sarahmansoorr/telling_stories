@@ -59,13 +59,13 @@ data_2015 <- data_2015 %>% select(operation_name, operation_type,
                                    energy_intensity_ek_wh_mega_litre)
 data_2015 <- data_2015 %>% drop_na()
 
+# Clean operation_type names
 df <- data_2015
 df$operation_type[df$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
 df$operation_type[df$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
 df$operation_type[df$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
 df$operation_type[df$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
-
-
+data_2015 <- df
 
 # Cleaning 2016 data
 colnames(data_2016) <- my_column_names
