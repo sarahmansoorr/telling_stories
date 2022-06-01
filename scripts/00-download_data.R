@@ -21,9 +21,6 @@ package <- show_package("0600cad8-d024-483b-a9a8-ecfc3e32e375")
 #get package resources
 resources <- package %>% list_package_resources()
 
-list_package_resources("0600cad8-d024-483b-a9a8-ecfc3e32e375") %>%
-  get_resource()
-
 # 2015 data
 data_2015 <- resources[3,] %>% get_resource()
 
