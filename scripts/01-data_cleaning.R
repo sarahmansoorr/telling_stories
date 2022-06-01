@@ -47,9 +47,9 @@ colnames(data_2015) <- my_column_names
 
 # Clean using janitor and dplyr
 data_2015 <- clean_names(data_2015)
-data_2015 <- remove_empty(data_20151, which = c("rows", "cols"),
+data_2015 <- remove_empty(data_2015, which = c("rows", "cols"),
                            quiet = FALSE)
-data_2015 <- distinct(data_20152)
+data_2015 <- distinct(data_2015)
 
 data_2015 <- data_2015 %>% select(operation_name, operation_type, 
                                    city, total_floor_area, avg_hrs_wk, 
@@ -57,7 +57,7 @@ data_2015 <- data_2015 %>% select(operation_name, operation_type,
                                    natural_gas_quantity, ghg_emissions_kg, 
                                    energy_intensity_ek_wh_sqft,
                                    energy_intensity_ek_wh_mega_litre)
-data_20151 <- data_2015 %>% drop_na()
+data_2015 <- data_2015 %>% drop_na()
 
 # Cleaning 2016 data
 colnames(data_2016) <- my_column_names
@@ -118,4 +118,5 @@ data_2018 <- data_2018 %>% select(operation_name, operation_type,
                                   energy_intensity_ek_wh_sqft,
                                   energy_intensity_ek_wh_mega_litre)
 data_20181 <- data_2018 %>% drop_na()
+
 
