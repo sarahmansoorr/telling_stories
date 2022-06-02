@@ -68,14 +68,14 @@ df$operation_type[df$operation_type=="Facilities related to the treatment of sew
 data_2015 <- df
 
 # Convert chr to num
-data_2015$total_floor_area = as.numeric(total_floor_area)
-data_2015$avg_hrs_wk = as.numeric(avg_hrs_wk)
-data_2015$annual_flow_mega_liters = as.numeric(annual_flow_mega_liters)
-data_2015$electricity_quantity = as.numeric(electricity_quantity)
-data_2015$natural_gas_quantity = as.numeric(natural_gas_quantity)
-data_2015$ghg_emissions_kg = as.numeric(ghg_emissions_kg)
-data_2015$energy_intensity_ek_wh_sqft = as.numeric(energy_intensity_ek_wh_sqft)
-data_2015$energy_intensity_ek_wh_mega_litre = as.numeric(energy_intensity_ek_wh_mega_litre)
+data_2015$total_floor_area = as.numeric(data_2015$total_floor_area)
+data_2015$avg_hrs_wk = as.numeric(data_2015$avg_hrs_wk)
+data_2015$annual_flow_mega_liters = as.numeric(data_2015$annual_flow_mega_liters)
+data_2015$electricity_quantity = as.numeric(data_2015$electricity_quantity)
+data_2015$natural_gas_quantity = as.numeric(data_2015$natural_gas_quantity)
+data_2015$ghg_emissions_kg = as.numeric(data_2015$ghg_emissions_kg)
+data_2015$energy_intensity_ek_wh_sqft = as.numeric(data_2015$energy_intensity_ek_wh_sqft)
+data_2015$energy_intensity_ek_wh_mega_litre = as.numeric(data_2015$energy_intensity_ek_wh_mega_litre)
 
 
 # Cleaning 2016 data
@@ -107,14 +107,14 @@ df$operation_type[df$operation_type=="Facilities related to the treatment of sew
 data_2016 <- df
 
 # Convert chr to num
-data_2016$total_floor_area = as.numeric(total_floor_area)
-data_2016$avg_hrs_wk = as.numeric(avg_hrs_wk)
-data_2016$annual_flow_mega_liters = as.numeric(annual_flow_mega_liters)
-data_2016$electricity_quantity = as.numeric(electricity_quantity)
-data_2016$natural_gas_quantity = as.numeric(natural_gas_quantity)
-data_2016$ghg_emissions_kg = as.numeric(ghg_emissions_kg)
-data_2016$energy_intensity_ek_wh_sqft = as.numeric(energy_intensity_ek_wh_sqft)
-data_2016$energy_intensity_ek_wh_mega_litre = as.numeric(energy_intensity_ek_wh_mega_litre)
+data_2016$total_floor_area = as.numeric(data_2016$total_floor_area)
+data_2016$avg_hrs_wk = as.numeric(data_2016$avg_hrs_wk)
+data_2016$annual_flow_mega_liters = as.numeric(data_2016$annual_flow_mega_liters)
+data_2016$electricity_quantity = as.numeric(data_2016$electricity_quantity)
+data_2016$natural_gas_quantity = as.numeric(data_2016$natural_gas_quantity)
+data_2016$ghg_emissions_kg = as.numeric(data_2016$ghg_emissions_kg)
+data_2016$energy_intensity_ek_wh_sqft = as.numeric(data_2016$energy_intensity_ek_wh_sqft)
+data_2016$energy_intensity_ek_wh_mega_litre = as.numeric(data_2016$energy_intensity_ek_wh_mega_litre)
 
 
 
@@ -137,6 +137,25 @@ data_2017 <- data_2017 %>% select(operation_name, operation_type,
                                   energy_intensity_ek_wh_sqft,
                                   energy_intensity_ek_wh_mega_litre)
 data_2017 <- data_2017 %>% drop_na()
+
+# Clean operation_type names
+df <- data_2017
+df$operation_type[df$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
+df$operation_type[df$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
+df$operation_type[df$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
+df$operation_type[df$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
+data_2017 <- df
+
+# Convert chr to num
+data_2017$total_floor_area = as.numeric(data_2017$total_floor_area)
+data_2017$avg_hrs_wk = as.numeric(data_2017$avg_hrs_wk)
+data_2017$annual_flow_mega_liters = as.numeric(data_2017$annual_flow_mega_liters)
+data_2017$electricity_quantity = as.numeric(data_2017$electricity_quantity)
+data_2017$natural_gas_quantity = as.numeric(data_2017$natural_gas_quantity)
+data_2017$ghg_emissions_kg = as.numeric(data_2017$ghg_emissions_kg)
+data_2017$energy_intensity_ek_wh_sqft = as.numeric(data_2017$energy_intensity_ek_wh_sqft)
+data_2017$energy_intensity_ek_wh_mega_litre = as.numeric(data_2017$energy_intensity_ek_wh_mega_litre)
+
 
 # Cleaning 2018 data
 colnames(data_2018) <- my_column_names
