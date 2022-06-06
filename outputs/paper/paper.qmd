@@ -58,34 +58,36 @@ data_2018 <- read.csv("inputs/data/data_2018.csv")
 
 # Visualizing the Data and The Implications
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-
-par(mfrow = c(2, 2))
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2015 by Operation Type", fig.width=7, fig.height=3.2}
 
 data_2015 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
   xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
   labs(title="GHG Emissions by Operation Type 2015", colour = "City")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2016 by Operation Type", fig.width=7, fig.height=3.2}
 
 data_2016 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
   xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
   labs(title="GHG Emissions by Operation Type 2016", colour = "City")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2017 by Operation Type", fig.width=7, fig.height=3.2}
 
 data_2017 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
   xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
   labs(title="GHG Emissions by Operation Type 2017", colour = "City")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2015 by Operation Type", fig.width=7, fig.height=3.2}
 
 data_2018 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
   xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
   labs(title="GHG Emissions by Operation Type 2018", colour = "City")
-
 ```
-
-## Implications
-
-## **Limitations**
 
 # Next Steps
