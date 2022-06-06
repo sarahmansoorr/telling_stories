@@ -176,6 +176,26 @@ data_2018 <- data_2018 %>% select(operation_name, operation_type,
                                   energy_intensity_ek_wh_mega_litre)
 data_2018 <- data_2018 %>% drop_na()
 
+# Clean operation_type names
+df <- data_2018
+df$operation_type[df$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
+df$operation_type[df$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
+df$operation_type[df$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
+df$operation_type[df$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
+data_2018 <- df
+
+# Convert chr to num
+data_2018$total_floor_area = as.numeric(data_2018$total_floor_area)
+data_2018$avg_hrs_wk = as.numeric(data_2018$avg_hrs_wk)
+data_2018$annual_flow_mega_liters = as.numeric(data_2018$annual_flow_mega_liters)
+data_2018$electricity_quantity = as.numeric(data_2018$electricity_quantity)
+data_2018$natural_gas_quantity = as.numeric(data_2018$natural_gas_quantity)
+data_2018$ghg_emissions_kg = as.numeric(data_2018$ghg_emissions_kg)
+data_2018$energy_intensity_ek_wh_sqft = as.numeric(data_2018$energy_intensity_ek_wh_sqft)
+data_2018$energy_intensity_ek_wh_mega_litre = as.numeric(data_2018$energy_intensity_ek_wh_mega_litre)
+
+
+
 # Import clean 2015 data
 write_csv(
   x = data_2015,
