@@ -47,10 +47,10 @@ This data set contains 1311 observations with 36 variables with information abou
 
 # Load energy consumption data
 
-data_2015 <- read.csv("inputs/data/data_2015.csv") 
-data_2016 <- read.csv("inputs/data/data_2016.csv") 
-data_2017 <- read.csv("inputs/data/data_2017.csv") 
-data_2018 <- read.csv("inputs/data/data_2018.csv")
+data_2015 <- read.csv("telling_stories/inputs/data/data_2015.csv") 
+data_2016 <- read.csv("telling_stories/inputs/data/data_2016.csv") 
+data_2017 <- read.csv("telling_stories/inputs/data/data_2017.csv") 
+data_2018 <- read.csv("telling_stories/inputs/data/data_2018.csv")
 ```
 
 # Visualizing the Data and The Implications
@@ -87,6 +87,10 @@ data_2018 %>% ggplot(aes(operation_type,
   labs(title="GHG Emissions by Operation Type 2018", colour = "City")
 ```
 
-As seen in Figures 1 to 4, there are drastic changes in GHG emissions by operation type and city from 2015 to 2018. From 2015 to 2016, GHG emissions were the most in Toronto for the sewage treatment operation, and the second highest was Toronto for the water treatment operation.  
+As seen in Figures 1 to 4, there are drastic changes in GHG emissions by operation type and city from 2015 to 2018. From 2015 to 2016, GHG emissions were the most in Toronto for the sewage treatment operation, and the second highest was Toronto for the water treatment operation. Both 2015 and 2016 had these results. 
+
+In 2017, the graph changes drastically. It can be observed that Toronto still had some of the highest GHG emissions for the sewage treatment operation but not nearly as much as it was before. The same can be seen in 2018. 
 
 # Next Steps
+
+After analyzing this data set and 
