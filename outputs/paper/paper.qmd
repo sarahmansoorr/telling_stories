@@ -4,7 +4,7 @@ subtitle: "A Look Into How Energy Consumption has Changed from 2015 to 2018 "
 author: "Sarah Mansoor"
 thanks: "Code and data are available at: https://github.com/sarahmansoorr/telling_stories"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data ... ."
+abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data to find that there have been less GHG emissions from 2015 to 2018."
 bibliography: references.bib
 output:
   bookdown::pdf_document2: default
@@ -42,9 +42,6 @@ This assignment uses a data set from Open Data Toronto called Annual Energy Cons
 
 This data set contains 1311 observations with 36 variables with information about energy consumption for different operations in Toronto. This report will focus on operation name, operation type, city, total floor area, annual flow (ML), and GHG emissions (kg). The data set has been cleaned for the 4 files from 2015 to 2018 using R [@citeR] and R packages: "tidyverse", "dplyr" and "janitor".
 
-|     |
-|-----|
-|     |
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -89,5 +86,7 @@ data_2018 %>% ggplot(aes(operation_type,
   xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
   labs(title="GHG Emissions by Operation Type 2018", colour = "City")
 ```
+
+As seen in Figures 1 to 4, there are drastic changes in GHG emissions by operation type and city from 2015 to 2018. From 2015 to 2016, GHG emissions were the most in Toronto for the sewage treatment operation, and the second highest was Toronto for the water treatment operation.  
 
 # Next Steps
