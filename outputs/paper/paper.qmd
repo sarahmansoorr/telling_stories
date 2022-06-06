@@ -93,4 +93,5 @@ In 2017, the graph changes drastically. It can be observed that Toronto still ha
 
 # Next Steps
 
-After analyzing this data set and 
+After analyzing this data set, it can be observed that the GHG emissions are still very high throughout the GTA and there should be efforts to reduce these emissions. There should be further analysis done on the sewage and water treatment operations to find out what has been causing the high GHG emissions for these operations. 
+
