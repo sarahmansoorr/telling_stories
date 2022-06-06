@@ -77,7 +77,6 @@ data_2015$ghg_emissions_kg = as.numeric(data_2015$ghg_emissions_kg)
 data_2015$energy_intensity_ek_wh_sqft = as.numeric(data_2015$energy_intensity_ek_wh_sqft)
 data_2015$energy_intensity_ek_wh_mega_litre = as.numeric(data_2015$energy_intensity_ek_wh_mega_litre)
 
-
 # Cleaning 2016 data
 colnames(data_2016) <- my_column_names
 
@@ -177,4 +176,26 @@ data_2018 <- data_2018 %>% select(operation_name, operation_type,
                                   energy_intensity_ek_wh_mega_litre)
 data_2018 <- data_2018 %>% drop_na()
 
+# Import clean 2015 data
+write_csv(
+  x = data_2015,
+  file = "telling_stories/inputs/data/energy_consumption_2015.csv"
+)
 
+# Import clean 2016 data
+write_csv(
+  x = data_2016,
+  file = "telling_stories/inputs/data/energy_consumption_2016.csv"
+)
+
+# Import clean 2017 data
+write_csv(
+  x = data_2017,
+  file = "telling_stories/inputs/data/energy_consumption_2017.csv"
+)
+
+# Import clean 2018 data
+write_csv(
+  x = data_2018,
+  file = "telling_stories/inputs/data/energy_consumption_2018.csv"
+)
