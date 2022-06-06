@@ -20,23 +20,10 @@ library(patchwork)
 library(knitr)
 library(reshape2)
 library(janitor)
-library(kableExtra)
-library(sf)
-library(RColorBrewer)
-library(forcats)
-
-
-raw_data_2015 <- read_csv(here::here("inputs/data/raw_data_2015.csv"))
-raw_data_2016 <- read_csv(here::here("inputs/data/raw_data_2016.csv"))
-raw_data_2017 <- read_csv(here::here("inputs/data/raw_data_2017.csv"))
-raw_data_2018 <- read_csv(here::here("inputs/data/raw_data_2018.csv"))
-cleaned_data_2015 <- read_csv(here::here("inputs/data/cleaned_data_2015.csv"))
-cleaned_data_2016 <- read_csv(here::here("inputs/data/cleaned_data_2016.csv"))
-cleaned_data_2017 <- read_csv(here::here("inputs/data/cleaned_data_2017.csv"))
-cleaned_data_2018 <- read_csv(here::here("inputs/data/cleaned_data_2018.csv"))
-
-load('outputs/energy_consumption.RData')
-
+#library(kableExtra)
+#library(sf)
+#library(RColorBrewer)
+#library(forcats)
 ```
 
 # Introduction
@@ -45,7 +32,7 @@ Over the years many have seen the consequences of climate change on the weather,
 
 The Green Energy Act's Regulation 397/11 requires the completion of an Energy Conservation and Demand Management (ECDM) Plan every 5 years. The City of Toronto completed the first edition of the ECDM plan, which was approved by the Council, in 2014. Facilities have been selected for energy retrofit work based on the energy savings they make and greenhouse gas reduction potential. The City aims to build on its previous energy efficiency achievements using the ECDM plan as a agenda for the identification, implementation and verification of future energy saving projects.
 
-I will explore GHG emissions in Toronto between the years 2015 and 2018, and observe that ... .
+I will explore GHG emissions in Toronto between the years 2015 and 2018 with respect to the operation type, the city, .... Through exploration of this data set, it can offer insights on ways to reduce GHG emissions by further analyzing which operations produce the most GHG emissions and why.
 
 \pagebreak
 
@@ -53,58 +40,47 @@ I will explore GHG emissions in Toronto between the years 2015 and 2018, and obs
 
 This assignment uses a data set from Open Data Toronto called Annual Energy Consumption. This data set contains columns for the energy consumption of individual buildings in Toronto that are required by Ontario Regulation 397/11 and the Green Energy Act to report their GHG emissions.
 
-This data set contains yearly xlsx spreadsheets from 2015 to 2018 that have columns with the operation name; operation type; address; total floor area; amount of energy purchased in the form of electricity and natural gas; and GHG emissions.
+This data set contains 1311 observations with 36 variables with information about energy consumption for different operations in Toronto. This report will focus on operation name, operation type, city, total floor area, annual flow (ML), and GHG emissions (kg). The data set has been cleaned for the 4 files from 2015 to 2018 using R [@citeR] and R packages: "tidyverse", "dplyr" and "janitor".
 
 |     |
 |-----|
 |     |
 
-## Variables of interest
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
-The main variables that I am interested in for this paper are GHG emissions, electricity purchased and total floor area.
+# Load energy consumption data
+
+data_2015 <- read.csv("inputs/data/data_2015.csv") 
+data_2016 <- read.csv("inputs/data/data_2016.csv") 
+data_2017 <- read.csv("inputs/data/data_2017.csv") 
+data_2018 <- read.csv("inputs/data/data_2018.csv")
+```
 
 # Visualizing the Data and The Implications
 
-```{r echo=FALSE, fig.cap="Comparing Energy Consumption each year from 2015 to 2018", fig.width=8.4, fig.height=3.6}
-GHG <- energy.consumption |>
-  ggplot(mapping = aes(x = Year, y = GHG.Emissions, group=Year)) +
-  geom_boxplot() +
-  geom_jitter(alpha=0.05, width=0.2, height=0) +
-  theme_classic() +
-  labs(
-    x = 'Year',
-    y = 'GHG emissions (kg)'
-  ) +
-  scale_y_continuous(trans='log', labels=function(x) sprintf("%.1e", x)) +
-  theme(axis.text.y = element_text(angle = 60, vjust = 0.5, hjust=0.5))
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
+par(mfrow = c(2, 2))
 
-electricity <- energy_consumption |>
-  ggplot(mapping = aes(x = Year, y = Electricity, group=Year)) +
-  geom_boxplot() +
-  geom_jitter(alpha=0.05, width=0.2, height=0) +
-  theme_classic() +
-  labs(
-    x = 'Year',
-    y = 'Electricity Consumption (Wh)'
-  ) +
-  scale_y_continuous(trans='log', labels=function(x) sprintf("%.1e", x)) +
-  theme(axis.text.y = element_text(angle = 60, vjust = 0.5, hjust=0.5))
+data_2015 %>% ggplot(aes(operation_type, 
+                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
+  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
+  labs(title="GHG Emissions by Operation Type 2015", colour = "City")
 
+data_2016 %>% ggplot(aes(operation_type, 
+                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
+  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
+  labs(title="GHG Emissions by Operation Type 2016", colour = "City")
 
-floor_area <- energy_consumption |>
-  ggplot(mapping = aes(x = Year, y = Total.Floor.Area, group=Year)) +
-  geom_boxplot() +
-  geom_jitter(alpha=0.05, width=0.2, height=0) +
-  theme_classic() +
-  labs(
-    x = 'Year',
-    y = 'Total Floor Area'
-  ) +
-  scale_y_continuous(trans='log', labels=function(x) sprintf("%.1e", x)) +
-  theme(axis.text.y = element_text(angle = 60, vjust = 0.5, hjust=0.5))
+data_2017 %>% ggplot(aes(operation_type, 
+                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
+  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
+  labs(title="GHG Emissions by Operation Type 2017", colour = "City")
 
-(ele + flr) / ghg
+data_2018 %>% ggplot(aes(operation_type, 
+                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
+  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
+  labs(title="GHG Emissions by Operation Type 2018", colour = "City")
 
 ```
 
