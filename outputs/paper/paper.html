@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.393">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sarah Mansoor">
+<meta name="dcterms.date" content="2022-06-13">
+
+<title>Vizualizing Annual Energy Consumption in Toronto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+<script src="paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="paper_files/libs/quarto-html/quarto.js"></script>
+<script src="paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="paper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link id="quarto-text-highlighting-styles" href="paper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<script src="paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Vizualizing Annual Energy Consumption in Toronto</h1>
+<p class="subtitle lead">A Look Into How Energy Consumption has Changed from 2015 to 2018</p>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sarah Mansoor </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 13, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data to find that there have been less GHG emissions from 2015 to 2018 in Toronto.
+  </div>
+</div>
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Over the years many have seen the consequences of climate change on the weather, their health, storms, and rising sea levels.</p>
+<p>The Green Energy Act’s Regulation 397/11 requires the completion of an Energy Conservation and Demand Management (ECDM) Plan every 5 years. The City of Toronto completed the first edition of the ECDM plan, which was approved by the Council, in 2014. Facilities have been selected for energy retrofit work based on the energy savings they make and greenhouse gas reduction potential. The City aims to build on its previous energy efficiency achievements using the ECDM plan as a agenda for the identification, implementation and verification of future energy saving projects.</p>
+<p>I will explore GHG emissions in Toronto between the years 2015 and 2018 with respect to the operation type and the city. Through exploration of this data set, it can offer insights on ways to reduce GHG emissions by further analyzing which operations produce the most GHG emissions and why.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<p>This assignment uses a data set from Open Data Toronto called Annual Energy Consumption. This data set contains columns for the energy consumption of individual buildings in Toronto that are required by Ontario Regulation 397/11 and the Green Energy Act to report their GHG emissions.</p>
+<p>This data set contains 1311 observations with 36 variables with information about energy consumption for different operations in Toronto. This report will focus on operation name, operation type, city, total floor area, annual flow (ML), and GHG emissions (kg). The data set has been cleaned for the 4 files from 2015 to 2018 using R <span class="citation" data-cites="citeR">[@citeR]</span> and R packages: “tidyverse”, “dplyr” and “janitor”.</p>
+<div class="cell">
+
+</div>
+</section>
+<section id="visualizing-the-data-and-the-implications" class="level1">
+<h1>Visualizing the Data and The Implications</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="864"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 1: GHG Emissions for 2015 by Operation Type</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="864"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 2: GHG Emissions for 2016 by Operation Type</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="864"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3: GHG Emissions for 2017 by Operation Type</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="864"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 4: GHG Emissions for 2015 by Operation Type</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As seen in Figures 1 to 4, there are drastic changes in GHG emissions by operation type and city from 2015 to 2018. From 2015 to 2016, GHG emissions were the most in Toronto for the sewage treatment operation, and the second highest was Toronto for the water treatment operation. Both 2015 and 2016 had these results.</p>
+<p>In 2017, the graph changes drastically. It can be observed that Toronto still had some of the highest GHG emissions for the sewage treatment operation but not nearly as much as it was before. The same can be seen in 2018.</p>
+</section>
+<section id="next-steps" class="level1">
+<h1>Next Steps</h1>
+<p>After analyzing this data set, it can be observed that the GHG emissions are still very high throughout the GTA and there should be efforts to reduce these emissions. There should be further analysis done on the sewage and water treatment operations to find out what has been causing the high GHG emissions for these operations.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

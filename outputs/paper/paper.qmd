@@ -4,10 +4,12 @@ subtitle: "A Look Into How Energy Consumption has Changed from 2015 to 2018 "
 author: "Sarah Mansoor"
 thanks: "Code and data are available at: https://github.com/sarahmansoorr/telling_stories"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data to find that there have been less GHG emissions from 2015 to 2018."
-bibliography: references.bib
-output:
-  bookdown::pdf_document2: default
+abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data to find that there have been less GHG emissions from 2015 to 2018 in Toronto."
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
 ---
 
 ```{r setup, include=FALSE}
@@ -32,7 +34,7 @@ Over the years many have seen the consequences of climate change on the weather,
 
 The Green Energy Act's Regulation 397/11 requires the completion of an Energy Conservation and Demand Management (ECDM) Plan every 5 years. The City of Toronto completed the first edition of the ECDM plan, which was approved by the Council, in 2014. Facilities have been selected for energy retrofit work based on the energy savings they make and greenhouse gas reduction potential. The City aims to build on its previous energy efficiency achievements using the ECDM plan as a agenda for the identification, implementation and verification of future energy saving projects.
 
-I will explore GHG emissions in Toronto between the years 2015 and 2018 with respect to the operation type, the city, .... Through exploration of this data set, it can offer insights on ways to reduce GHG emissions by further analyzing which operations produce the most GHG emissions and why.
+I will explore GHG emissions in Toronto between the years 2015 and 2018 with respect to the operation type and the city. Through exploration of this data set, it can offer insights on ways to reduce GHG emissions by further analyzing which operations produce the most GHG emissions and why.
 
 \pagebreak
 
@@ -42,20 +44,19 @@ This assignment uses a data set from Open Data Toronto called Annual Energy Cons
 
 This data set contains 1311 observations with 36 variables with information about energy consumption for different operations in Toronto. This report will focus on operation name, operation type, city, total floor area, annual flow (ML), and GHG emissions (kg). The data set has been cleaned for the 4 files from 2015 to 2018 using R [@citeR] and R packages: "tidyverse", "dplyr" and "janitor".
 
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # Load energy consumption data
 
-data_2015 <- read.csv("telling_stories/inputs/data/data_2015.csv") 
-data_2016 <- read.csv("telling_stories/inputs/data/data_2016.csv") 
-data_2017 <- read.csv("telling_stories/inputs/data/data_2017.csv") 
-data_2018 <- read.csv("telling_stories/inputs/data/data_2018.csv")
+data_2015 <- read.csv("~/Desktop/telling_stories/inputs/data/clean_data_2015.csv")
+data_2016 <- read.csv("~/Desktop/telling_stories/inputs/data/clean_data_2016.csv") 
+data_2017 <- read.csv("~/Desktop/telling_stories/inputs/data/clean_data_2017.csv")
+data_2018 <- read.csv("~/Desktop/telling_stories/inputs/data/clean_data_2018.csv")
 ```
 
 # Visualizing the Data and The Implications
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2015 by Operation Type", fig.width=7, fig.height=3.2}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Figure 1: GHG Emissions for 2015 by Operation Type", fig.width=9, fig.height=3.2}
 
 data_2015 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
@@ -63,7 +64,7 @@ data_2015 %>% ggplot(aes(operation_type,
   labs(title="GHG Emissions by Operation Type 2015", colour = "City")
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2016 by Operation Type", fig.width=7, fig.height=3.2}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Figure 2: GHG Emissions for 2016 by Operation Type", fig.width=9, fig.height=3.2}
 
 data_2016 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
@@ -71,7 +72,7 @@ data_2016 %>% ggplot(aes(operation_type,
   labs(title="GHG Emissions by Operation Type 2016", colour = "City")
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2017 by Operation Type", fig.width=7, fig.height=3.2}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Figure 3: GHG Emissions for 2017 by Operation Type", fig.width=9, fig.height=3.2}
 
 data_2017 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
@@ -79,7 +80,7 @@ data_2017 %>% ggplot(aes(operation_type,
   labs(title="GHG Emissions by Operation Type 2017", colour = "City")
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2015 by Operation Type", fig.width=7, fig.height=3.2}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Figure 4: GHG Emissions for 2015 by Operation Type", fig.width=9, fig.height=3.2}
 
 data_2018 %>% ggplot(aes(operation_type, 
                          y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
@@ -87,11 +88,10 @@ data_2018 %>% ggplot(aes(operation_type,
   labs(title="GHG Emissions by Operation Type 2018", colour = "City")
 ```
 
-As seen in Figures 1 to 4, there are drastic changes in GHG emissions by operation type and city from 2015 to 2018. From 2015 to 2016, GHG emissions were the most in Toronto for the sewage treatment operation, and the second highest was Toronto for the water treatment operation. Both 2015 and 2016 had these results. 
+As seen in Figures 1 to 4, there are drastic changes in GHG emissions by operation type and city from 2015 to 2018. From 2015 to 2016, GHG emissions were the most in Toronto for the sewage treatment operation, and the second highest was Toronto for the water treatment operation. Both 2015 and 2016 had these results.
 
-In 2017, the graph changes drastically. It can be observed that Toronto still had some of the highest GHG emissions for the sewage treatment operation but not nearly as much as it was before. The same can be seen in 2018. 
+In 2017, the graph changes drastically. It can be observed that Toronto still had some of the highest GHG emissions for the sewage treatment operation but not nearly as much as it was before. The same can be seen in 2018.
 
 # Next Steps
 
-After analyzing this data set, it can be observed that the GHG emissions are still very high throughout the GTA and there should be efforts to reduce these emissions. There should be further analysis done on the sewage and water treatment operations to find out what has been causing the high GHG emissions for these operations. 
-
+After analyzing this data set, it can be observed that the GHG emissions are still very high throughout the GTA and there should be efforts to reduce these emissions. There should be further analysis done on the sewage and water treatment operations to find out what has been causing the high GHG emissions for these operations.

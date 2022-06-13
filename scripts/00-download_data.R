@@ -36,23 +36,23 @@ data_2018 <- resources[6,] %>% get_resource()
 # Import 2015 data
 write_csv(
   x = data_2015,
-  file = "telling_stories/inputs/data/energy_consumption_2015.csv"
+  file = "~/Desktop/telling_stories/inputs/data/data_2015.csv"
 )
 
 # Import 2016 data
 write_csv(
   x = data_2016,
-  file = "telling_stories/inputs/data/energy_consumption_2016.csv"
+  file = "~/Desktop/telling_stories/inputs/data/data_2016.csv"
 )
 
 # Import 7 data
 write_csv(
   x = data_2017,
-  file = "telling_stories/inputs/data/energy_consumption_2017.csv"
+  file = "~/Desktop/telling_stories/inputs/data/data_2017.csv"
 )
 
 # Import 2018 data
 write_csv(
   x = data_2018,
-  file = "telling_stories/inputs/data/energy_consumption_2018.csv"
+  file = "~/Desktop/telling_stories/inputs/data/data_2018.csv"
 )

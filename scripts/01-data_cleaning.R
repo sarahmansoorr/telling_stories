@@ -19,10 +19,10 @@ library(janitor)
 
 # Load Data
 
-data_2015 <- read.csv("telling_stories/inputs/data/energy_consumption_2015.csv")
-data_2016 <- read.csv("telling_stories/inputs/data/energy_consumption_2016.csv")
-data_2017 <- read.csv("telling_stories/inputs/data/energy_consumption_2017.csv")
-data_2018 <- read.csv("telling_stories/inputs/data/energy_consumption_2018.csv")
+data_2015 <- read.csv("~/Desktop/telling_stories/inputs/data/data_2015.csv")
+data_2016 <- read.csv("~/Desktop/telling_stories/inputs/data/data_2016.csv")
+data_2017 <- read.csv("~/Desktop/telling_stories/inputs/data/data_2017.csv")
+data_2018 <- read.csv("~/Desktop/telling_stories/inputs/data/data_2018.csv")
 
 # Cleaning data
 my_column_names <- c("Operation Name", "Operation Type", "Address",
@@ -41,9 +41,6 @@ my_column_names <- c("Operation Name", "Operation Type", "Address",
 
 ### Cleaning 2015 data ###
 colnames(data_2015) <- my_column_names
-
-# Remove first 7 rows
-# ...
 
 # Clean using janitor and dplyr
 data_2015 <- clean_names(data_2015)
@@ -80,9 +77,6 @@ data_2015$energy_intensity_ek_wh_mega_litre = as.numeric(data_2015$energy_intens
 # Cleaning 2016 data
 colnames(data_2016) <- my_column_names
 
-# Remove first 7 rows
-# ...
-
 # Clean using janitor and dplyr
 data_2016 <- clean_names(data_2016)
 data_2016 <- remove_empty(data_2016, which = c("rows", "cols"),
@@ -116,12 +110,8 @@ data_2016$energy_intensity_ek_wh_sqft = as.numeric(data_2016$energy_intensity_ek
 data_2016$energy_intensity_ek_wh_mega_litre = as.numeric(data_2016$energy_intensity_ek_wh_mega_litre)
 
 
-
 # Cleaning 2017 data
 colnames(data_2017) <- my_column_names
-
-# Remove first 7 rows
-# ...
 
 # Clean using janitor and dplyr
 data_2017 <- clean_names(data_2017)
@@ -159,9 +149,6 @@ data_2017$energy_intensity_ek_wh_mega_litre = as.numeric(data_2017$energy_intens
 # Cleaning 2018 data
 colnames(data_2018) <- my_column_names
 
-# Remove first 7 rows
-# ...
-
 # Clean using janitor and dplyr
 data_2018 <- clean_names(data_2018)
 data_2018 <- remove_empty(data_2018, which = c("rows", "cols"),
@@ -195,27 +182,26 @@ data_2018$energy_intensity_ek_wh_sqft = as.numeric(data_2018$energy_intensity_ek
 data_2018$energy_intensity_ek_wh_mega_litre = as.numeric(data_2018$energy_intensity_ek_wh_mega_litre)
 
 
-
 # Import clean 2015 data
 write_csv(
   x = data_2015,
-  file = "telling_stories/inputs/data/energy_consumption_2015.csv"
+  file = "~/Desktop/telling_stories/inputs/data/clean_data_2015.csv"
 )
 
 # Import clean 2016 data
 write_csv(
   x = data_2016,
-  file = "telling_stories/inputs/data/energy_consumption_2016.csv"
+  file = "~/Desktop/telling_stories/inputs/data/clean_data_2016.csv"
 )
 
 # Import clean 2017 data
 write_csv(
   x = data_2017,
-  file = "telling_stories/inputs/data/energy_consumption_2017.csv"
+  file = "~/Desktop/telling_stories/inputs/data/clean_data_2017.csv"
 )
 
 # Import clean 2018 data
 write_csv(
   x = data_2018,
-  file = "telling_stories/inputs/data/energy_consumption_2018.csv"
+  file = "~/Desktop/telling_stories/inputs/data/clean_data_2018.csv"
 )
