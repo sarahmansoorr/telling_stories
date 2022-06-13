@@ -5,11 +5,8 @@ author: "Sarah Mansoor"
 thanks: "Code and data are available at: https://github.com/sarahmansoorr/telling_stories"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data to find that there have been less GHG emissions from 2015 to 2018 in Toronto."
-format:
-  pdf:
-    toc: true
-    number-sections: true
-    colorlinks: true
+format: pdf
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}

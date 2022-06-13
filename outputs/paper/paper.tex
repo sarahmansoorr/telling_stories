@@ -38,7 +38,7 @@
 \makeatother
 \usepackage{xcolor}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
   \let\oldparagraph\paragraph
@@ -132,7 +132,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Introduction},
+  pdftitle={Vizualizing Annual Energy Consumption in Toronto},
   pdfauthor={Sarah Mansoor},
   colorlinks=true,
   linkcolor={blue},
@@ -141,7 +141,8 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{Introduction\thanks{Code and data are available at:
+\title{Vizualizing Annual Energy Consumption in Toronto\thanks{Code and
+data are available at:
 https://github.com/sarahmansoorr/telling\_stories}}
 \usepackage{etoolbox}
 \makeatletter
@@ -163,14 +164,11 @@ greenhouse gas emissions in Toronto and their change between the years
 2011 and 2018. I examine the data to find that there have been less GHG
 emissions from 2015 to 2018 in Toronto.
 \end{abstract}
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, boxrule=0pt, sharp corners, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, sharp corners, interior hidden, frame hidden]}{\end{tcolorbox}}\fi
 
-\renewcommand*\contentsname{Table of contents}
-{
-\hypersetup{linkcolor=}
-\setcounter{tocdepth}{3}
-\tableofcontents
-}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
 Over the years many have seen the consequences of climate change on the
 weather, their health, storms, and rising sea levels.
 
@@ -192,7 +190,8 @@ why.
 
 \pagebreak
 
-Data
+\hypertarget{data}{%
+\section{Data}\label{data}}
 
 This assignment uses a data set from Open Data Toronto called Annual
 Energy Consumption. This data set contains columns for the energy
@@ -207,7 +206,9 @@ total floor area, annual flow (ML), and GHG emissions (kg). The data set
 has been cleaned for the 4 files from 2015 to 2018 using R {[}@citeR{]}
 and R packages: ``tidyverse'', ``dplyr'' and ``janitor''.
 
-Visualizing the Data and The Implications
+\hypertarget{visualizing-the-data-and-the-implications}{%
+\section{Visualizing the Data and The
+Implications}\label{visualizing-the-data-and-the-implications}}
 
 \begin{figure}
 
@@ -260,7 +261,8 @@ still had some of the highest GHG emissions for the sewage treatment
 operation but not nearly as much as it was before. The same can be seen
 in 2018.
 
-Next Steps
+\hypertarget{next-steps}{%
+\section{Next Steps}\label{next-steps}}
 
 After analyzing this data set, it can be observed that the GHG emissions
 are still very high throughout the GTA and there should be efforts to
