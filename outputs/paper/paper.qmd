@@ -4,7 +4,7 @@ subtitle: "A Look Into How Energy Consumption has Changed from 2015 to 2018 "
 author: "Sarah Mansoor"
 thanks: "Code and data are available at: https://github.com/sarahmansoorr/telling_stories"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data to find that there have been less GHG emissions from 2015 to 2018 in Toronto."
+abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in Toronto and their change between the years 2011 and 2018. I examine the data to find that there have has not been much change in GHG emissions from 2015 to 2018 in Toronto."
 format: pdf
 ---
 
@@ -50,41 +50,67 @@ energy_2015_2018 <- read.csv("~/Desktop/telling_stories/inputs/data/energy_data_
 
 # Visualizing the Data and The Implications
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2015 by Operation Type", fig.width=9, fig.height=3.2}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
 
-data_2015 %>% ggplot(aes(operation_type, 
-                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
-  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
-  labs(title="GHG Emissions by Operation Type 2015", colour = "City")
+# GHG emissions by year and operation type
+energy_2015_2018 %>% ggplot(aes(x = year, y = ghg_emissions_kg, 
+                                color = operation_type)) + geom_point()
+
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" ) %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                            operation_type != "Other") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                              operation_type != "Other" & 
+                              operation_type != "Administrative Offices" & 
+                              operation_type != "Water Treatment") %>% ggplot(
+    aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                              operation_type != "Other" & 
+                              operation_type != "Administrative Offices" & 
+                              operation_type != "Water Treatment" & 
+                              operation_type != "Water Pumping") %>% ggplot(
+     aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+
+energy_2015_2018 %>% filter(operation_type == "Sewage Treatment" | 
+                              operation_type == "Water Treatment" | 
+                              operation_type == "Water Pumping" | 
+                              operation_type == "Administrative Offices") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2016 by Operation Type", fig.width=9, fig.height=3.2}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+# GHG emissions by year and city
 
-data_2016 %>% ggplot(aes(operation_type, 
-                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
-  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
-  labs(title="GHG Emissions by Operation Type 2016", colour = "City")
+energy_2015_2018 %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
+
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
+
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                              city != "Toronto") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2017 by Operation Type", fig.width=9, fig.height=3.2}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
 
-data_2017 %>% ggplot(aes(operation_type, 
-                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
-  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
-  labs(title="GHG Emissions by Operation Type 2017", colour = "City")
+library(kableExtra)
+
+energy_2015_2018 %>% select(operation_type, city, ghg_emissions_kg, year)  %>%
+  slice(c(162, 393, 1310, 1318, 2610, 2650, 4100, 4150, 5560, 5566)) %>%
+    kable(
+      caption = "Extracting rows from the Annual Energy Consumption Data",
+      col.names=c("Operation Type", "City", "GHG Emissions (kg)", "Year"),
+      linesep = "", digits = 2, booktabs=TRUE) %>%
+    kable_styling(latex_options = "HOLD_position", font_size = 10)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="GHG Emissions for 2015 by Operation Type", fig.width=9, fig.height=3.2}
 
-data_2018 %>% ggplot(aes(operation_type, 
-                         y = ghg_emissions_kg, colour = city)) + geom_boxplot() +
-  xlab("Operation Type") + ylab("GHG Emissions (kg)") + 
-  labs(title="GHG Emissions by Operation Type 2018", colour = "City")
-```
-
-As seen in Figures 1 to 4, there are drastic changes in GHG emissions by operation type and city from 2015 to 2018. From 2015 to 2016, GHG emissions were the most in Toronto for the sewage treatment operation, and the second highest was Toronto for the water treatment operation. Both 2015 and 2016 had these results.
-
-In 2017, the graph changes drastically. It can be observed that Toronto still had some of the highest GHG emissions for the sewage treatment operation but not nearly as much as it was before. The same can be seen in 2018.
 
 # Next Steps
 
