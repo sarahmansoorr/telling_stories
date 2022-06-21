@@ -39,169 +39,143 @@ my_column_names <- c("Operation Name", "Operation Type", "Address",
                      "District Cooling Emission Factor", "GHG Emissions (kg)", "Energy Intensity (ekWh/sqft)",
                      "Energy Intensity (ekWh/Mega Litre", "Building/Operation Identifier", "Comments")
 
-### Cleaning 2015 data ###
+### Cleaning 2015 data ----
 colnames(data_2015) <- my_column_names
 
 # Clean using janitor and dplyr
 data_2015 <- clean_names(data_2015)
-data_2015 <- remove_empty(data_2015, which = c("rows", "cols"),
-                           quiet = FALSE)
-data_2015 <- distinct(data_2015)
 
 data_2015 <- data_2015 %>% select(operation_name, operation_type, 
-                                   city, total_floor_area, avg_hrs_wk, 
-                                   annual_flow_mega_liters, electricity_quantity, 
-                                   natural_gas_quantity, ghg_emissions_kg, 
-                                   energy_intensity_ek_wh_sqft,
-                                   energy_intensity_ek_wh_mega_litre)
+                                  city, electricity_quantity, ghg_emissions_kg)
+
+
 data_2015 <- data_2015 %>% drop_na()
 
+# Add year column
+data_2015 <- data_2015 %>%
+  mutate(year = "2015")
+
 # Clean operation_type names
-df <- data_2015
-df$operation_type[df$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
-df$operation_type[df$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
-df$operation_type[df$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
-df$operation_type[df$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
-data_2015 <- df
+data_2015$operation_type[data_2015$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
+data_2015$operation_type[data_2015$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
+data_2015$operation_type[data_2015$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
+data_2015$operation_type[data_2015$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
+data_2015$operation_type[data_2015$operation_type=="Storage facilities where equipment or vehicles are maintained, repaired or stored"] <- "Storage"
+data_2015$operation_type[data_2015$operation_type=="Police stations and associated offices and facilities"] <- "Police Station"
+data_2015$operation_type[data_2015$operation_type=="Administrative offices and related facilities, including municipal council chambers"] <- "Administrative Offices"
+data_2015$operation_type[data_2015$operation_type=="Ambulance stations and associated offices and facilities"] <- "Ambulance Station"
+data_2015$operation_type[data_2015$operation_type=="Fire stations and associated offices and facilities"] <- "Police Station"
 
 # Convert chr to num
-data_2015$total_floor_area = as.numeric(data_2015$total_floor_area)
-data_2015$avg_hrs_wk = as.numeric(data_2015$avg_hrs_wk)
-data_2015$annual_flow_mega_liters = as.numeric(data_2015$annual_flow_mega_liters)
 data_2015$electricity_quantity = as.numeric(data_2015$electricity_quantity)
-data_2015$natural_gas_quantity = as.numeric(data_2015$natural_gas_quantity)
 data_2015$ghg_emissions_kg = as.numeric(data_2015$ghg_emissions_kg)
-data_2015$energy_intensity_ek_wh_sqft = as.numeric(data_2015$energy_intensity_ek_wh_sqft)
-data_2015$energy_intensity_ek_wh_mega_litre = as.numeric(data_2015$energy_intensity_ek_wh_mega_litre)
 
-# Cleaning 2016 data
+data_2015 <- data_2015[-1,]
+
+### Cleaning 2016 data ----
 colnames(data_2016) <- my_column_names
 
 # Clean using janitor and dplyr
 data_2016 <- clean_names(data_2016)
-data_2016 <- remove_empty(data_2016, which = c("rows", "cols"),
-                          quiet = FALSE)
-data_2016 <- distinct(data_2016)
 
 data_2016 <- data_2016 %>% select(operation_name, operation_type, 
-                                  city, total_floor_area, avg_hrs_wk, 
-                                  annual_flow_mega_liters, electricity_quantity, 
-                                  natural_gas_quantity, ghg_emissions_kg, 
-                                  energy_intensity_ek_wh_sqft,
-                                  energy_intensity_ek_wh_mega_litre)
+                                  city, electricity_quantity, ghg_emissions_kg)
+
+
 data_2016 <- data_2016 %>% drop_na()
 
 # Clean operation_type names
-df <- data_2016
-df$operation_type[df$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
-df$operation_type[df$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
-df$operation_type[df$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
-df$operation_type[df$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
-data_2016 <- df
+data_2016$operation_type[data_2016$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
+data_2016$operation_type[data_2016$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
+data_2016$operation_type[data_2016$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
+data_2016$operation_type[data_2016$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
+data_2016$operation_type[data_2016$operation_type=="Storage facilities where equipment or vehicles are maintained, repaired or stored"] <- "Storage"
+data_2016$operation_type[data_2016$operation_type=="Police stations and associated offices and facilities"] <- "Police Station"
+data_2016$operation_type[data_2016$operation_type=="Administrative offices and related facilities, including municipal council chambers"] <- "Administrative Offices"
+data_2016$operation_type[data_2016$operation_type=="Ambulance stations and associated offices and facilities"] <- "Ambulance Station"
+data_2016$operation_type[data_2016$operation_type=="Fire stations and associated offices and facilities"] <- "Police Station"
 
 # Convert chr to num
-data_2016$total_floor_area = as.numeric(data_2016$total_floor_area)
-data_2016$avg_hrs_wk = as.numeric(data_2016$avg_hrs_wk)
-data_2016$annual_flow_mega_liters = as.numeric(data_2016$annual_flow_mega_liters)
 data_2016$electricity_quantity = as.numeric(data_2016$electricity_quantity)
-data_2016$natural_gas_quantity = as.numeric(data_2016$natural_gas_quantity)
 data_2016$ghg_emissions_kg = as.numeric(data_2016$ghg_emissions_kg)
-data_2016$energy_intensity_ek_wh_sqft = as.numeric(data_2016$energy_intensity_ek_wh_sqft)
-data_2016$energy_intensity_ek_wh_mega_litre = as.numeric(data_2016$energy_intensity_ek_wh_mega_litre)
 
+data_2016 <- data_2016[-1,]
 
-# Cleaning 2017 data
+# Add year column
+data_2016 <- data_2016 %>%
+  mutate(year = "2016")
+
+### Cleaning 2017 data ----
 colnames(data_2017) <- my_column_names
 
 # Clean using janitor and dplyr
 data_2017 <- clean_names(data_2017)
-data_2017 <- remove_empty(data_2017, which = c("rows", "cols"),
-                          quiet = FALSE)
-data_2017 <- distinct(data_2017)
 
 data_2017 <- data_2017 %>% select(operation_name, operation_type, 
-                                  city, total_floor_area, avg_hrs_wk, 
-                                  annual_flow_mega_liters, electricity_quantity, 
-                                  natural_gas_quantity, ghg_emissions_kg, 
-                                  energy_intensity_ek_wh_sqft,
-                                  energy_intensity_ek_wh_mega_litre)
+                                  city, electricity_quantity, ghg_emissions_kg)
+
+
 data_2017 <- data_2017 %>% drop_na()
 
 # Clean operation_type names
-df <- data_2017
-df$operation_type[df$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
-df$operation_type[df$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
-df$operation_type[df$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
-df$operation_type[df$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
-data_2017 <- df
+data_2017$operation_type[data_2017$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
+data_2017$operation_type[data_2017$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
+data_2017$operation_type[data_2017$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
+data_2017$operation_type[data_2017$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
+data_2017$operation_type[data_2017$operation_type=="Storage facilities where equipment or vehicles are maintained, repaired or stored"] <- "Storage"
+data_2017$operation_type[data_2017$operation_type=="Police stations and associated offices and facilities"] <- "Police Station"
+data_2017$operation_type[data_2017$operation_type=="Administrative offices and related facilities, including municipal council chambers"] <- "Administrative Offices"
+data_2017$operation_type[data_2017$operation_type=="Ambulance stations and associated offices and facilities"] <- "Ambulance Station"
+data_2017$operation_type[data_2017$operation_type=="Fire stations and associated offices and facilities"] <- "Police Station"
 
 # Convert chr to num
-data_2017$total_floor_area = as.numeric(data_2017$total_floor_area)
-data_2017$avg_hrs_wk = as.numeric(data_2017$avg_hrs_wk)
-data_2017$annual_flow_mega_liters = as.numeric(data_2017$annual_flow_mega_liters)
 data_2017$electricity_quantity = as.numeric(data_2017$electricity_quantity)
-data_2017$natural_gas_quantity = as.numeric(data_2017$natural_gas_quantity)
 data_2017$ghg_emissions_kg = as.numeric(data_2017$ghg_emissions_kg)
-data_2017$energy_intensity_ek_wh_sqft = as.numeric(data_2017$energy_intensity_ek_wh_sqft)
-data_2017$energy_intensity_ek_wh_mega_litre = as.numeric(data_2017$energy_intensity_ek_wh_mega_litre)
 
+data_2017 <- data_2017[-1,]
+
+# Add year column
+data_2017 <- data_2017 %>%
+  mutate(year = "2017")
 
 # Cleaning 2018 data
 colnames(data_2018) <- my_column_names
 
 # Clean using janitor and dplyr
 data_2018 <- clean_names(data_2018)
-data_2018 <- remove_empty(data_2018, which = c("rows", "cols"),
-                          quiet = FALSE)
-data_2018 <- distinct(data_2018)
 
 data_2018 <- data_2018 %>% select(operation_name, operation_type, 
-                                  city, total_floor_area, avg_hrs_wk, 
-                                  annual_flow_mega_liters, electricity_quantity, 
-                                  natural_gas_quantity, ghg_emissions_kg, 
-                                  energy_intensity_ek_wh_sqft,
-                                  energy_intensity_ek_wh_mega_litre)
+                                  city, electricity_quantity, ghg_emissions_kg)
+
+
 data_2018 <- data_2018 %>% drop_na()
 
 # Clean operation_type names
-df <- data_2018
-df$operation_type[df$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
-df$operation_type[df$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
-df$operation_type[df$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
-df$operation_type[df$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
-data_2018 <- df
+data_2018$operation_type[data_2018$operation_type=="Facilities related to the pumping of sewage"] <- "Sewage Pumping"
+data_2018$operation_type[data_2018$operation_type=="Facilities related to the pumping of water"] <- "Water Pumping"
+data_2018$operation_type[data_2018$operation_type=="Facilities related to the treatment of water"] <- "Water Treatment"
+data_2018$operation_type[data_2018$operation_type=="Facilities related to the treatment of sewage"] <- "Sewage Treatment"
+data_2018$operation_type[data_2018$operation_type=="Storage facilities where equipment or vehicles are maintained, repaired or stored"] <- "Storage"
+data_2018$operation_type[data_2018$operation_type=="Police stations and associated offices and facilities"] <- "Police Station"
+data_2018$operation_type[data_2018$operation_type=="Administrative offices and related facilities, including municipal council chambers"] <- "Administrative Offices"
+data_2018$operation_type[data_2018$operation_type=="Ambulance stations and associated offices and facilities"] <- "Ambulance Station"
+data_2018$operation_type[data_2018$operation_type=="Fire stations and associated offices and facilities"] <- "Police Station"
 
 # Convert chr to num
-data_2018$total_floor_area = as.numeric(data_2018$total_floor_area)
-data_2018$avg_hrs_wk = as.numeric(data_2018$avg_hrs_wk)
-data_2018$annual_flow_mega_liters = as.numeric(data_2018$annual_flow_mega_liters)
 data_2018$electricity_quantity = as.numeric(data_2018$electricity_quantity)
-data_2018$natural_gas_quantity = as.numeric(data_2018$natural_gas_quantity)
 data_2018$ghg_emissions_kg = as.numeric(data_2018$ghg_emissions_kg)
-data_2018$energy_intensity_ek_wh_sqft = as.numeric(data_2018$energy_intensity_ek_wh_sqft)
-data_2018$energy_intensity_ek_wh_mega_litre = as.numeric(data_2018$energy_intensity_ek_wh_mega_litre)
 
+data_2018 <- data_2018[-1,]
 
-# Import clean 2015 data
+# Add year column
+data_2018 <- data_2018 %>%
+  mutate(year = "2018")
+
+### Combine 2015-2018 data ----
+energy_2015_2018 <- rbind(data_2015, data_2016, data_2017, data_2018)
+
+# Import clean 2015 to 2018 data
 write_csv(
-  x = data_2015,
-  file = "~/Desktop/telling_stories/inputs/data/clean_data_2015.csv"
-)
-
-# Import clean 2016 data
-write_csv(
-  x = data_2016,
-  file = "~/Desktop/telling_stories/inputs/data/clean_data_2016.csv"
-)
-
-# Import clean 2017 data
-write_csv(
-  x = data_2017,
-  file = "~/Desktop/telling_stories/inputs/data/clean_data_2017.csv"
-)
-
-# Import clean 2018 data
-write_csv(
-  x = data_2018,
-  file = "~/Desktop/telling_stories/inputs/data/clean_data_2018.csv"
+  x = energy_2015_2018,
+  file = "~/Desktop/telling_stories/inputs/data/energy_data_2015_2018.csv"
 )
