@@ -35,13 +35,12 @@ In most discussions around climate change, the focus tends to be on carbon dioxi
 
 I will explore GHG emissions in the GTA between the years 2015 and 2018 with respect to the operation type and the city. The dataset contains annual energy consumption data for different cities around the GTA. Through exploration of this data set, it can offer insights on ways to reduce GHG emissions by further analyzing which operations produce the most GHG emissions and which produces the least, as well as how these emissions have changed from 2015 to 2018.
 
-\pagebreak
-
 # Data
 
 This assignment uses a data set from Open Data Toronto called Annual Energy Consumption. This data set contains columns for the energy consumption of individual buildings in Toronto that are required by Ontario Regulation 397/11 and the Green Energy Act to report their GHG emissions.
 
 This data set contains 5561 observations with 6 variables with information about energy consumption for different operations in Toronto. This report will focus on operation name, operation type, city, electricity quantity, GHG emissions (kg) and the year. The data set has been cleaned for the 4 files from 2015 to 2018 using R and R packages: "tidyverse", "dplyr" and "janitor".
+
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -49,55 +48,6 @@ This data set contains 5561 observations with 6 variables with information about
 
 energy_2015_2018 <- read.csv("~/Desktop/telling_stories/inputs/data/energy_data_2015_2018.csv")
 
-```
-
-# Visualizing the Data and The Implications
-
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
-
-# GHG emissions by year and operation type
-energy_2015_2018 %>% ggplot(aes(x = year, y = ghg_emissions_kg, 
-                                color = operation_type)) + geom_point()
-
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" ) %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
-
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
-                            operation_type != "Other") %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
-
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
-                              operation_type != "Other" & 
-                              operation_type != "Administrative Offices" & 
-                              operation_type != "Water Treatment") %>% ggplot(
-    aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
-
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
-                              operation_type != "Other" & 
-                              operation_type != "Administrative Offices" & 
-                              operation_type != "Water Treatment" & 
-                              operation_type != "Water Pumping") %>% ggplot(
-     aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
-
-energy_2015_2018 %>% filter(operation_type == "Sewage Treatment" | 
-                              operation_type == "Water Treatment" | 
-                              operation_type == "Water Pumping" | 
-                              operation_type == "Administrative Offices") %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
-# GHG emissions by year and city
-
-energy_2015_2018 %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
-
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment") %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
-
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
-                              city != "Toronto") %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
@@ -112,6 +62,79 @@ energy_2015_2018 %>% select(operation_type, city, ghg_emissions_kg, year)  %>%
       linesep = "", digits = 2, booktabs=TRUE) %>%
     kable_styling(latex_options = "HOLD_position", font_size = 10)
 ```
+
+
+## Visualizing the GHG emissions by Year and Operation Type
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+# GHG emissions by year and operation type
+energy_2015_2018 %>% ggplot(aes(x = year, y = ghg_emissions_kg, 
+                                color = operation_type)) + geom_point()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" ) %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                            operation_type != "Other") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                              operation_type != "Other" & 
+                              operation_type != "Administrative Offices" & 
+                              operation_type != "Water Treatment") %>% ggplot(
+    aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                              operation_type != "Other" & 
+                              operation_type != "Administrative Offices" & 
+                              operation_type != "Water Treatment" & 
+                              operation_type != "Water Pumping") %>% ggplot(
+     aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+energy_2015_2018 %>% filter(operation_type == "Sewage Treatment" | 
+                              operation_type == "Water Treatment" | 
+                              operation_type == "Water Pumping" | 
+                              operation_type == "Administrative Offices") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+```
+
+## Visualizing the GHG emissions by Year and City
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+# GHG emissions by year and city
+
+energy_2015_2018 %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
+energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
+                              city != "Toronto") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
+```
+
 
 
 
