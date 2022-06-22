@@ -174,6 +174,9 @@ data_2018 <- data_2018 %>%
 ### Combine 2015-2018 data ----
 energy_2015_2018 <- rbind(data_2015, data_2016, data_2017, data_2018)
 
+energy_2015_2018 <- energy_2015_2018 %>% filter(city != "0") %>% 
+  mutate(city = replace(city, city == "TORONTO", "Toronto"))
+
 # Import clean 2015 to 2018 data
 write_csv(
   x = energy_2015_2018,
