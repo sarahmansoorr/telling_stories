@@ -6,7 +6,7 @@ thanks: "Code and data are available at: https://github.com/sarahmansoorr/tellin
 date: "`r format(Sys.time(), '%d %B %Y')`"
 abstract: "Greenhouse gas emissions have a significant impact on the global climate and are a key factor in climate change. This paper aims to examine the greenhouse gas emissions in the GTA and their change between the years 2011 and 2018. I examine the data to find that there have has not been much change in GHG emissions from 2015 to 2018 in the GTA."
 format: pdf
-# bibliography: "~/Desktop/telling_stories/outputs/paper/references.bib"
+bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -27,11 +27,11 @@ library(janitor)
 
 # Introduction
 
-Climate change is one of the most significant environmental concerns of our time. Climate change is caused by the development in concentrations of greenhouse gases in the atmosphere. These increases are due to GHG emissions using fossil fuels or agriculture. This changing climate has effects on the environment, human health, and the economy. 
+Climate change is one of the most significant environmental concerns of our time. Climate change is caused by the development in concentrations of greenhouse gases in the atmosphere. These increases are due to GHG emissions using fossil fuels or agriculture. This changing climate has effects on the environment, human health, and the economy.
 
-Since 2015 and the signing of the Paris Agreement, Canada implemented 2005 as the base year for its GHG emission reduction target. In 2021, Canada remained devoted to reduce its GHG emissions by 40 45 percent below 2005 levels by 2030. 
+Since 2015 and the signing of the Paris Agreement, Canada implemented 2005 as the base year for its GHG emission reduction target. In 2021, Canada remained devoted to reduce its GHG emissions by 40 45 percent below 2005 levels by 2030.
 
-In most discussions around climate change, the focus tends to be on carbon dioxide (CO2) which is the most dominant greenhouse gas that is produced by the burning of fossil fuels. However, CO2 is not the only greenhouse gas that drives climate change. Methane, nitrous oxcide, and trace gases have contributed to a substantial amount of warming to today. These greenhouse gases have different warming effects, for example, one tonne of methane will not have the same impact on wamring as one tonne of carbon dioxide. 
+In most discussions around climate change, the focus tends to be on carbon dioxide (CO2) which is the most dominant greenhouse gas that is produced by the burning of fossil fuels. However, CO2 is not the only greenhouse gas that drives climate change. Methane, nitrous oxcide, and trace gases have contributed to a substantial amount of warming to today. These greenhouse gases have different warming effects, for example, one tonne of methane will not have the same impact on wamring as one tonne of carbon dioxide.
 
 I will explore GHG emissions in the GTA between the years 2015 and 2018 with respect to the operation type and the city. The dataset contains annual energy consumption data for different cities around the GTA. Through exploration of this data set, it can offer insights on ways to reduce GHG emissions by further analyzing which operations produce the most GHG emissions and which produces the least, as well as how these emissions have changed from 2015 to 2018.
 
@@ -40,7 +40,6 @@ I will explore GHG emissions in the GTA between the years 2015 and 2018 with res
 This assignment uses a data set from Open Data Toronto called Annual Energy Consumption. This data set contains columns for the energy consumption of individual buildings in Toronto that are required by Ontario Regulation 397/11 and the Green Energy Act to report their GHG emissions.
 
 This data set contains 5561 observations with 6 variables with information about energy consumption for different operations in Toronto. This report will focus on operation name, operation type, city, electricity quantity, GHG emissions (kg) and the year. The data set has been cleaned for the 4 files from 2015 to 2018 using R and R packages: "tidyverse", "dplyr" and "janitor".
-
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -63,81 +62,74 @@ energy_2015_2018 %>% select(operation_type, city, ghg_emissions_kg, year)  %>%
     kable_styling(latex_options = "HOLD_position", font_size = 10)
 ```
 
-
-## Visualizing the GHG emissions by Year and Operation Type
+## Visualizing GHG emissions by Year and Operation Type
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
 # GHG emissions by year and operation type
 energy_2015_2018 %>% ggplot(aes(x = year, y = ghg_emissions_kg, 
-                                color = operation_type)) + geom_point()
+                                color = operation_type)) + geom_point() + 
+  xlab("Year") + ylab("GHG Emissions (kg)")
 ```
 
+In this plot, we can see that *Sewage Treatment* has the highest GHG emissions and skews the graph. We can also note that this has been the case for all years that the data has been recorded from 2015 to 2018. What happens if we remove *Sewage Treatment* to analyze how skewed this operation is making the plot.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
 energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" ) %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point() + 
+  xlab("Year") + ylab("GHG Emissions (kg)")
 ```
 
+From this plot, we can see that once *Sewage Treatment* has been removed from the plot, the second highest emissions are from operation types labeled as *Other*. As with *Sewage Treatment*, the operation type *Other* remains consistently the second highest for all years that the data was collected. If we further remove this operation type from the plot as well, we notice the following:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
 energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
                             operation_type != "Other") %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point() + 
+  xlab("Year") + ylab("GHG Emissions (kg)")
 ```
 
+This plot uses all operation types besides *Sewage Treatment* and *Other*. From this plot, we can notice that the next highest GHG emissions from 2015 to 2018 are the operations *Admistrative Offices* and *Water Treatment.* Let's analyze these operations further.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
-                              operation_type != "Other" & 
-                              operation_type != "Administrative Offices" & 
-                              operation_type != "Water Treatment") %>% ggplot(
-    aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+energy_2015_2018 %>% filter(operation_type == "Water Treatment" | 
+                              operation_type == "Water Pumping" | 
+                              operation_type == "Administrative Offices") %>% ggplot(
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point() + 
+  xlab("Year") + ylab("GHG Emissions (kg)")
 ```
 
-
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
-                              operation_type != "Other" & 
-                              operation_type != "Administrative Offices" & 
-                              operation_type != "Water Treatment" & 
-                              operation_type != "Water Pumping") %>% ggplot(
-     aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
-```
-
+From this plot, we can see that the operations *Water Treatment, Water Pumping*, and *Administrative Offices* have high emissions for all years from 2015 to 2018. If we factor in the operation *Sewage Treatment* as well we get the plot below.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
 energy_2015_2018 %>% filter(operation_type == "Sewage Treatment" | 
                               operation_type == "Water Treatment" | 
                               operation_type == "Water Pumping" | 
                               operation_type == "Administrative Offices") %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point()
+  aes(x = year, y = ghg_emissions_kg, color = operation_type)) + geom_point() + 
+  xlab("Year") + ylab("GHG Emissions (kg)")
 ```
 
-## Visualizing the GHG emissions by Year and City
+We can notice that this graph is much more skewed than the previous. Compared to the operations *Water Treatment, Water Pumping*, and *Administrative Offices; Sewage Treatment* has much higher GHG emissions than those for all years.
+
+## Visualizing GHG emissions by Year and City
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
 # GHG emissions by year and city
 
 energy_2015_2018 %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
+  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point() + 
+  xlab("Year") + ylab("GHG Emissions (kg)")
 ```
 
+In the following plots, we can analyze how GHG emissions very by the year and the city. From our previous analysis, we know that the high GHG emissions points are from the operation *Sewage Treatment.* Using this plot, we can analyze which city the *Sewage Treatment* operations are from.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment") %>% ggplot(
+energy_2015_2018 %>% filter(city != "Toronto") %>% ggplot(
   aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
 ```
 
-
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.cap="", fig.width=9, fig.height=3.2}
-energy_2015_2018 %>% filter(operation_type != "Sewage Treatment" & 
-                              city != "Toronto") %>% ggplot(
-  aes(x = year, y = ghg_emissions_kg, color = city)) + geom_point()
-```
-
-
-
+In the above plot, I have taken out *Toronto* from the analysis to see whether or not the *Sewage Treatment* points come from *Toronto* and from this we can see that most of the *Sewage Treatment* operations that have high GHG emissions do come from *Toronto*.
 
 # Next Steps
 
-After analyzing this data set, it can be observed that the GHG emissions are still very high throughout the GTA and there should be efforts to reduce these emissions. There should be further analysis done on the sewage and water treatment operations to find out what has been causing the high GHG emissions for these operations.
+After analyzing this data set, it can be observed that the GHG emissions are still very high throughout the GTA and there should be efforts to reduce these emissions. There should be further analysis done on the sewage and water treatment operations to find out what has been causing the high GHG emissions for these operations. There also needs to be updated data after 2018 and data from before 2015 so that we can accurately analyze how these GHG emissions are rising and when (if any) drastic changes occurred to any of the operations or cities.
